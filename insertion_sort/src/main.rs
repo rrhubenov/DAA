@@ -14,6 +14,7 @@ fn main() {
     .map(|s| s.parse().expect("Parse error"))
     .collect();
 
+    // TODO: There must be a better way to loop
     for i in 1..sequence.len() {
         let key: i32 = sequence[i];
 
@@ -32,3 +33,20 @@ fn main() {
     }
 }
 
+#[allow(dead_code)]
+fn non_increasing_sort(seq: &mut Vec::<i32>) -> &Vec::<i32> {
+    for i in 1..seq.len() {
+        let key: i32 = seq[i];
+
+        let mut j = (i - 1) as i32;
+
+        while j >= 0 && key > seq[j as usize] {
+            seq[(j + 1) as usize] = seq[j as usize];
+            j -= 1;
+        }
+        
+        seq[(j + 1) as usize] = key;
+    }
+
+    return seq
+}
