@@ -1,0 +1,29 @@
+THIS IS AN INFORMAL ANALYSIS
+
+The whole algorithm is one for/while loop.
+To prove it's correct we'll use a loop invariant.
+
+Pseudo code:
+
+for i in 1 to A.len:
+    if A[i] equals search_target
+        return i
+return NIL
+
+Our loop invariant will be A[1..i)
+It has the property that it DOES NOT contain v.
+
+1. Initialization:
+Before the first iteration our loop invariant is the empty set A[1..1)
+The empty set does not contain v trivially.
+
+2. Maintenance:
+Let's assume the invariant is true at the start of the loop.
+If A[i] is equal to v we have termination else the loop ends and the next
+loop begins => our loop invariant holds ture.
+
+3. Termination:
+The loop may end for two reasons:
+    - A[i] == v and v is returned
+    - i == A.length + 1 thus NIL is returned
+In both cases Linear search ends as expected.
