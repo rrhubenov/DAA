@@ -16,16 +16,13 @@ fn main() {
 
     // TODO: There must be a better way to loop
     for i in 1..sequence.len() {
-        let key: i32 = sequence[i];
-
-        let mut j = (i - 1) as i32;
-
-        while j >= 0 && key < sequence[j as usize] {
-            sequence[(j + 1) as usize] = sequence[j as usize];
+        let mut j = i as i32;
+        while j > 0 && sequence[j as usize] < sequence[(j - 1) as usize] {
+            let temp = sequence[j as usize];
+            sequence[j as usize] = sequence[(j-1)as usize];
+            sequence[(j-1) as usize] = temp;
             j -= 1;
         }
-
-        sequence[(j + 1) as usize] = key; 
     }
 
     for num in sequence {
