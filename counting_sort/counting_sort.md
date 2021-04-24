@@ -149,6 +149,28 @@ Invariant:
 Initialization:
     The first time the for loop is reached i = A.len. 
 
+
+## Time complexity analysis
+
+    First for loop runs k times.
+    Second for loop runs n times. (n = A.len)
+    Third for loop runs k-1 times.
+    Fourht for loop runs n times.
+
+    Thus the whole running time is T(n) = k + n + k - 1 + n
+    T(n) = 2k + 2n - 1
+    Since we're only intrested in the asymptotic time complexity
+    we can ignore the constants.
+    T(n) = Theta(n + k)
+
+    IF k < n, in other words if the set of possible values in A is less than A.len
+
+    T(n) = Theta(n)
+
+    ELSE
+
+    T(n) = Theta(n + k)
+
 ## Appendix
 
 ### Why we'd want a sorting algorithm to be stable
