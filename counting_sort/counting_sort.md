@@ -65,24 +65,24 @@ If we iterate forwards we would reverse the order of the equal elements. Thus it
 
 ## Pseudo code
 
-def CountingSort(A, k):
+    def CountingSort(A, k):
 
-create B with size k, create C with size A.len
+    create B with size k, create C with size A.len
 
-for i in 1 to k:
-    B[i] = 0
+    for i in 1 to k:
+        B[i] = 0
 
-for i in 1 to A.len:
-    B[A[i]] += 1
+    for i in 1 to A.len:
+        B[A[i]] += 1
 
-for i in 2 to k:
-    B[i] += B[i-1]
+    for i in 2 to k:
+        B[i] += B[i-1]
 
-for i in A.len downto 1:
-    C[B[A[i]]] = A[i]
-    B[A[i]] -= 1
+    for i in A.len downto 1:
+        C[B[A[i]]] = A[i]
+        B[A[i]] -= 1
 
-return C
+    return C
 
 ## Proof of correctnes using invariants
 
@@ -114,8 +114,27 @@ QED
 
 ### Third for loop proof
 
-We want to prove that every element i in B
+For the third for loop we need to prove that every element in B has the sum of all the 
+previous elements.
 
+Invariant:
+    For every element j in the subarray B[1..i-1], B[j] = sum of all B[m] where m < j + itself
+
+Initialization:
+    When the algo first reaches the for loop B[2..i-1] = B[1..1]. Since the first element
+    has no previous, our invariant is trivially correct.
+
+Maintanence:
+    Let's assume our invariant is correct at the start of an iteration.
+    This would mean that B[i-1] is the sum of all B[j] where j < i plus itself.
+    The only instruction that is executed is that B[i-1] is added to B[i].
+    When i gets incremented we can definetely say that B[1..i-1] has the properties
+    of our invariant.
+
+Termination:
+    The for loop will terminate when i is equal to k+1.
+    Since k is the size of B, B[1..k+1 - 1] is the whole array.
+    Thus our invariant is correct for the whole array B
 
 ### Fourth for loop proof
 
@@ -123,9 +142,12 @@ We want to prove that the last for loop fills C with the correct permutation of 
 such that Counting sort maintains its stableness.
 
 Invariant:
-    Every element 'a' in A[i..A.len] is in C s.t. for every element 'j' in C that is on the right of 'a': 'a' <= 'j'
-    and every element 'i' that is to the left of 'a': 'i' <= 'a'
+    Every element in A[i+1..A.len] is in the correct position in C.
+    Not only that but equal elements maintain their relative position as in A.
+    In other words, Counting sort is a stable sorting algorithm.
 
+Initialization:
+    The first time the for loop is reached i = A.len. 
 
 ## Appendix
 
