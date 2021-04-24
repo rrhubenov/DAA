@@ -150,6 +150,8 @@ Initialization:
     The first time the for loop is reached i = A.len. 
 
 
+    TODO: Figure out the propert invariant for the fourth for loop
+
 ## Time complexity analysis
 
     First for loop runs k times.
